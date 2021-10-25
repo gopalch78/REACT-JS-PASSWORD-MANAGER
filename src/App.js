@@ -83,10 +83,10 @@ class App extends Component {
       passwordList,
       isChecked,
     } = this.state
-    const updatedList = passwordList.filter(each =>
-      each.websiteInput.toLowerCase().includes(searchInput.toLowerCase()),
+    const searchResults = passwordList.filter(eachUser =>
+      eachUser.websiteInput.toLowerCase().includes(searchInput.toLowerCase()),
     )
-    const count = updatedList.length
+
     return (
       <div className="app-container">
         <img
@@ -162,9 +162,7 @@ class App extends Component {
             <div className="result-sub-container">
               <div className="heading-value-container">
                 <h2 className="password-heading">Your Passwords</h2>
-                <button type="button" className="zero-button">
-                  {count}
-                </button>
+                <p>{searchResults.length}</p>
               </div>
               <div className="image-search-container">
                 <img
@@ -190,16 +188,17 @@ class App extends Component {
               />
               <label htmlFor="showPassword">Show passwords</label>
             </div>
-            {count === 0 ? (
+            {searchResults.length === 0 ? (
               this.renderNoPasswordsView()
             ) : (
               <ul>
-                {updatedList.map(eachPassword => (
+                {searchResults.map(eachPassword => (
                   <AppItem
                     key={eachPassword.id}
                     appDetails={eachPassword}
                     deletePassword={this.deletePassword}
                     isChecked={isChecked}
+                    searchResults={this.searchResults}
                   />
                 ))}
               </ul>
