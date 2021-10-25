@@ -1,14 +1,16 @@
 import './index.css'
 
 const AppItem = props => {
-  const {appDetails, deletePassword, isChecked} = props
-  const {id, websiteName, userName, userPassword} = appDetails
-  const initial = websiteName ? websiteName[0].toUpperCase() : ''
+  const {deletePassword, isChecked, appDetails} = props
+
+  const {id, websiteInput, userNameInput, passwordInput} = appDetails
+  const initial = websiteInput ? websiteInput[0].toUpperCase() : ''
+
   const onDeletePassword = () => {
     deletePassword(id)
   }
   const passwordUnShow = isChecked ? (
-    <p className="para">{userPassword}</p>
+    <p className="para">{passwordInput}</p>
   ) : (
     <img
       src="https://assets.ccbp.in/frontend/react-js/password-manager-stars-img.png"
@@ -22,9 +24,9 @@ const AppItem = props => {
           <p className="initialName">{initial}</p>
         </div>
         <div>
-          <p>{websiteName}</p>
-          <p>{userName}</p>
-          <p>{passwordUnShow}</p>
+          <p>{websiteInput}</p>
+          <p>{userNameInput}</p>
+          {passwordUnShow}
         </div>
         <div>
           <button type="button" testid="delete" onClick={onDeletePassword}>
@@ -41,3 +43,4 @@ const AppItem = props => {
 }
 
 export default AppItem
+
